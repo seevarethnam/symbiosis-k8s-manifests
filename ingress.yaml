@@ -3,8 +3,10 @@ kind: Ingress
 metadata:
   name: symbiosis-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: public
 spec:
+  ingressClassName: public
+  
   rules:
   - host: symbiosis.local
     http:
