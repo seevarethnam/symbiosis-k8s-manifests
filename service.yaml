@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: symbiosis-svc
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: symbiosis
   ports:
   - port: 3000
     targetPort: 3000
+    nodePort: 30000   
