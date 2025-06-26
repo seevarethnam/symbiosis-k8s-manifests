@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: symbiosis-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: symbiosis
+  template:
+    metadata:
+      labels:
+        app: symbiosis
+    spec:
+      containers:
+      - name: app
+        image: seevarethnam/symbiosis-app:9bb7dc1
+        ports:
+        - containerPort: 3000
+        env:
+        - name: DB_HOST
+          value: mysql
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 20
